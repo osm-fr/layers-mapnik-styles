@@ -1,0 +1,130 @@
+<!DOCTYPE Map>
+<Map srs="+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs +over" background-color="transparent" minimum-version="0.7.2">
+
+<!--
+<Style name="admin2">
+	<Rule>
+        <MaxScaleDenominator>100000</MaxScaleDenominator>
+	<PolygonSymbolizer>
+        	<CssParameter name="fill">#b0afaf</CssParameter>
+		<CssParameter name="fill-opacity">0.7</CssParameter>
+	</PolygonSymbolizer>
+	</Rule>
+</Style>
+-->
+<!--
+Pour indiquer les bordures de communes
+-->
+<Style name="admin_segment">
+	<Rule>
+		<MaxScaleDenominator>400000</MaxScaleDenominator>
+
+		<LineSymbolizer stroke="#FF0000" stroke-width="1" stroke-opacity="1"/></Rule>
+	
+</Style>
+<!--remplissage polygones -->
+<Style name="admin">
+<Rule>
+	<!--moins Z semaine -->
+	<MaxScaleDenominator>400000</MaxScaleDenominator>
+     	<Filter>[age] &lt; 6020</Filter>
+	     <PolygonSymbolizer fill-opacity="0.4" fill="#ba00b8"/></Rule>
+<Rule>	
+	<!--moins Y mois -->
+	<MaxScaleDenominator>400000</MaxScaleDenominator>
+     	<Filter>[age] &gt; 6020 and [age] &lt; 25800 </Filter>
+	<PolygonSymbolizer fill-opacity="0.4" fill="#f8a403"/></Rule>
+<Rule>
+	<!--moins X mois-->
+	<MaxScaleDenominator>400000</MaxScaleDenominator>
+     	<Filter>[age] &gt; 25800 and [age] &lt; 76800 </Filter>
+	<PolygonSymbolizer fill-opacity="0.4" fill="#f8f503"/></Rule>
+<Rule>
+     	<Filter>[age] &gt; 76800</Filter>
+ <!-- Le reste -->
+	<MaxScaleDenominator>400000</MaxScaleDenominator>
+
+	<PolygonSymbolizer fill-opacity="0.4" fill="#00FF00"/></Rule>
+<!-- bordures des polygones -->
+
+<!-- Nom des polygones -->
+
+<Rule>
+	<MaxScaleDenominator>400000</MaxScaleDenominator>
+	<TextSymbolizer size="9" fill="black" face-name="DejaVu Sans Bold" halo-radius="1" wrap-width="50">[name]</TextSymbolizer>
+</Rule>
+<Rule>
+	<MaxScaleDenominator>400000</MaxScaleDenominator>
+	<TextSymbolizer size="9" fill="black" dy="20" face-name="DejaVu Sans Bold" halo-radius="1" wrap-width="50">[ref]</TextSymbolizer>
+</Rule>
+</Style>
+<!--remplissage polygones vus de loin -->
+<Style name="admin_simplified">
+	<Rule>
+		<!--moins 1 semaine -->
+		<MinScaleDenominator>400000</MinScaleDenominator>
+		<Filter>[age] &lt; 6020</Filter>
+		<PolygonSymbolizer fill-opacity="0.4" fill="#ba00b8"/></Rule>
+	<Rule>	
+		<!--moins 1 mois -->
+		<MinScaleDenominator>400000</MinScaleDenominator>
+		<Filter>[age] &gt; 6020 and [age] &lt; 25800 </Filter>
+		<PolygonSymbolizer fill-opacity="0.4" fill="#f8a403"/></Rule>
+	<Rule>
+		<!--moins 3 mois-->
+		<MinScaleDenominator>400000</MinScaleDenominator>
+		<Filter>[age] &gt; 25800 and [age] &lt; 76800 </Filter>
+		<PolygonSymbolizer fill-opacity="0.4" fill="#f8f503"/></Rule>
+	<Rule>
+		<!-- Le reste -->
+		<MinScaleDenominator>400000</MinScaleDenominator>
+		<Filter>[age] &gt; 76800 </Filter>
+		<PolygonSymbolizer fill-opacity="0.4" fill="#00FF00"/></Rule>
+</Style>
+
+  <Layer name="admin" status="on" srs="+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs +over">
+    <StyleName>admin</StyleName>
+    <StyleName>admin_segment</StyleName>   
+    <Datasource>
+      <Parameter name="type">postgis</Parameter>
+	<Parameter name="host">osm2pgsql-monde.openstreetmap.fr</Parameter>
+      <Parameter name="user">mapnik</Parameter>
+      <Parameter name="password">ootaephi</Parameter>
+      <Parameter name="dbname">osm2pgsql</Parameter>
+      <Parameter name="table">
+	      (select name,'insee:'||"ref:INSEE" as ref,way,osm_id-(select min(osm_id) from planet_osm_polygon) as age from planet_osm_polygon where admin_level='8' and boundary='administrative' and name!='' ) as admin</Parameter>
+      <Parameter name="estimate_extent">false</Parameter>
+      <Parameter name="extent">-20037508,-19929239,20037508,19929239</Parameter>
+    </Datasource>
+  </Layer>
+  <Layer name="admin_simplified" status="on" srs="+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs +over">
+	  <StyleName>admin_simplified</StyleName>
+	  <Datasource>
+		  <Parameter name="type">postgis</Parameter>
+	<Parameter name="host">osm2pgsql-monde.openstreetmap.fr</Parameter>
+		  <Parameter name="user">mapnik</Parameter>
+		  <Parameter name="password">ootaephi</Parameter>
+		  <Parameter name="dbname">osm2pgsql</Parameter>
+		  <Parameter name="table">
+			  (select name,'insee:'||"ref:INSEE" as ref,simplified_way as way,osm_id-(select min(osm_id) from planet_osm_polygon) as age from planet_osm_polygon where admin_level='8' and boundary='administrative' and name!='' ) as admin</Parameter>
+		  <Parameter name="estimate_extent">false</Parameter>
+		  <Parameter name="extent">-20037508,-19929239,20037508,19929239</Parameter>
+	  </Datasource>
+  </Layer>
+  <!--
+  <Layer name="admin2" status="on" srs="+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs +over">
+    <StyleName>admin2</StyleName>
+    <Datasource>
+      <Parameter name="type">postgis</Parameter>
+	<Parameter name="host">osm2pgsql-monde.openstreetmap.fr</Parameter>
+      <Parameter name="user">mapnik</Parameter>
+      <Parameter name="password">ootaephi</Parameter>
+      <Parameter name="dbname">osm2pgsql</Parameter>
+      <Parameter name="table">
+	      (select way from planet_osm_polygon where st_isvalid(way)='f' and ST_nrings(way)=1 and admin_level='8' and boundary='administrative' and name!='' ) as admin</Parameter>
+      <Parameter name="estimate_extent">false</Parameter>
+      <Parameter name="extent">-20037508,-19929239,20037508,19929239</Parameter>
+    </Datasource>
+  </Layer>
+  -->
+</Map>
