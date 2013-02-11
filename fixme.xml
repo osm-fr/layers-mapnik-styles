@@ -17,8 +17,8 @@
       <Parameter name="password">ootaephi</Parameter>
       <Parameter name="dbname">osm2pgsql</Parameter>
       	<Parameter name="table">
-      	(select "fixme","FIXME",way from planet_osm_line where ("fixme" is not
-      	null) or ("FIXME" is not NULL) ) as roads
+      	(select "fixme","FIXME",way from planet_osm_line where (("fixme" is not
+      	null) or ("FIXME" is not NULL)) and "fixme" not in ('name') ) as roads
 	</Parameter>
       <Parameter name="estimate_extent">false</Parameter>
       <Parameter name="extent">-20037508,-19929239,20037508,19929239</Parameter>
@@ -33,8 +33,8 @@
       <Parameter name="password">ootaephi</Parameter>
       <Parameter name="dbname">osm2pgsql</Parameter>
       	<Parameter name="table">
-      	(select "fixme","FIXME",way from planet_osm_point where ("fixme" is not
-      	null) or ("FIXME" is not NULL) ) as points
+      	(select "fixme","FIXME",way from planet_osm_point where (("fixme" is not
+      	null) or ("FIXME" is not NULL)) and "fixme" not in ('name') ) as points
 	</Parameter>
       <Parameter name="estimate_extent">false</Parameter>
       <Parameter name="extent">-20037508,-19929239,20037508,19929239</Parameter>
