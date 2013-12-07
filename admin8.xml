@@ -92,7 +92,7 @@ Pour indiquer les bordures de communes
       <Parameter name="password">ootaephi</Parameter>
       <Parameter name="dbname">osm2pgsql</Parameter>
       <Parameter name="table">
-	      (select name,'insee:'||"ref:INSEE" as ref,way,osm_id-(select min(osm_id) from planet_osm_polygon) as age from planet_osm_polygon where admin_level='8' and boundary='administrative' and name!='' ) as admin</Parameter>
+	      (select name,'insee:'||(tags-&gt;'ref:INSEE') as ref,way,osm_id-(select min(osm_id) from planet_osm_polygon) as age from planet_osm_polygon where admin_level='8' and boundary='administrative' and name!='' ) as admin</Parameter>
       <Parameter name="estimate_extent">false</Parameter>
       <Parameter name="extent">-20037508,-19929239,20037508,19929239</Parameter>
     </Datasource>
@@ -106,7 +106,7 @@ Pour indiquer les bordures de communes
 		  <Parameter name="password">ootaephi</Parameter>
 		  <Parameter name="dbname">osm2pgsql</Parameter>
 		  <Parameter name="table">
-			  (select name,'insee:'||"ref:INSEE" as ref,simplified_way as way,osm_id-(select min(osm_id) from planet_osm_polygon) as age from planet_osm_polygon where admin_level='8' and boundary='administrative' and name!='' ) as admin</Parameter>
+			  (select name,'insee:'||(tags-&gt;'ref:INSEE') as ref,way as way,osm_id-(select min(osm_id) from planet_osm_polygon) as age from planet_osm_polygon where admin_level='8' and boundary='administrative' and name!='' ) as admin</Parameter>
 		  <Parameter name="estimate_extent">false</Parameter>
 		  <Parameter name="extent">-20037508,-19929239,20037508,19929239</Parameter>
 	  </Datasource>
