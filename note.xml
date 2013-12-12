@@ -13,9 +13,9 @@
     <Datasource>
       <Parameter name="type">postgis</Parameter>
 	<Parameter name="host">osm2pgsql-monde.openstreetmap.fr</Parameter>
-      <Parameter name="user">mapnik</Parameter>
+      <Parameter name="user">layers</Parameter>
       <Parameter name="password">ootaephi</Parameter>
-      <Parameter name="dbname">osm2pgsql</Parameter>
+      <Parameter name="dbname">osm</Parameter>
       	<Parameter name="table">
       	(select note,way from planet_osm_line where note is not null) as roads
 	</Parameter>
@@ -28,9 +28,9 @@
     <Datasource>
       <Parameter name="type">postgis</Parameter>
 	<Parameter name="host">osm2pgsql-monde.openstreetmap.fr</Parameter>
-      <Parameter name="user">mapnik</Parameter>
+      <Parameter name="user">layers</Parameter>
       <Parameter name="password">ootaephi</Parameter>
-      <Parameter name="dbname">osm2pgsql</Parameter>
+      <Parameter name="dbname">osm</Parameter>
       	<Parameter name="table">
       	(select note,way from planet_osm_point where note is not null) as points
 	</Parameter>

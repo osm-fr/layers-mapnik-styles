@@ -88,9 +88,9 @@ Pour indiquer les bordures de communes
     <Datasource>
       <Parameter name="type">postgis</Parameter>
 	<Parameter name="host">osm2pgsql-monde.openstreetmap.fr</Parameter>
-      <Parameter name="user">mapnik</Parameter>
+      <Parameter name="user">layers</Parameter>
       <Parameter name="password">ootaephi</Parameter>
-      <Parameter name="dbname">osm2pgsql</Parameter>
+      <Parameter name="dbname">osm</Parameter>
       <Parameter name="table">
 	      (select name,'insee:'||(tags-&gt;'ref:INSEE') as ref,way,osm_id-(select min(osm_id) from planet_osm_polygon) as age from planet_osm_polygon where admin_level='8' and boundary='administrative' and name!='' ) as admin</Parameter>
       <Parameter name="estimate_extent">false</Parameter>
@@ -102,9 +102,9 @@ Pour indiquer les bordures de communes
 	  <Datasource>
 		  <Parameter name="type">postgis</Parameter>
 	<Parameter name="host">osm2pgsql-monde.openstreetmap.fr</Parameter>
-		  <Parameter name="user">mapnik</Parameter>
+		  <Parameter name="user">layers</Parameter>
 		  <Parameter name="password">ootaephi</Parameter>
-		  <Parameter name="dbname">osm2pgsql</Parameter>
+		  <Parameter name="dbname">osm</Parameter>
 		  <Parameter name="table">
 			  (select name,'insee:'||(tags-&gt;'ref:INSEE') as ref,way as way,osm_id-(select min(osm_id) from planet_osm_polygon) as age from planet_osm_polygon where admin_level='8' and boundary='administrative' and name!='' ) as admin</Parameter>
 		  <Parameter name="estimate_extent">false</Parameter>
@@ -117,9 +117,9 @@ Pour indiquer les bordures de communes
     <Datasource>
       <Parameter name="type">postgis</Parameter>
 	<Parameter name="host">osm2pgsql-monde.openstreetmap.fr</Parameter>
-      <Parameter name="user">mapnik</Parameter>
+      <Parameter name="user">layers</Parameter>
       <Parameter name="password">ootaephi</Parameter>
-      <Parameter name="dbname">osm2pgsql</Parameter>
+      <Parameter name="dbname">osm</Parameter>
       <Parameter name="table">
 	      (select way from planet_osm_polygon where st_isvalid(way)='f' and ST_nrings(way)=1 and admin_level='8' and boundary='administrative' and name!='' ) as admin</Parameter>
       <Parameter name="estimate_extent">false</Parameter>
