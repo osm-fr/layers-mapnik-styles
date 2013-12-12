@@ -1,0 +1,9 @@
+create-table-cadastre-voirie.sql : structure de la table qui garder les infos du cadastre
+
+import_csv_voirie.php il importe vers la table d'avant
+
+cadastre.sql.gz c'est un dump du résultat des deux précédent
+
+statistiques-du-cadastre-en-2011.csv : la donnée brute en provenance de l'outil de F. Rodrigo
+
+mise-a-jour-km-voirie-par-commune.php : calcul, pour osm, des km de voirie par commune
