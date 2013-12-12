@@ -16,7 +16,7 @@
       <Parameter name="password">ootaephi</Parameter>
       <Parameter name="dbname">osm</Parameter>
       <Parameter name="table">
-	      (select way from planet_osm_line where (highway='tertiary' or highway='secondary' or  highway = 'primary' or highway = 'motorway') and ref is NULL and hstore(tags)->"validate:no_ref" is NULL and junction is NULL) as roads
+	      (select way from planet_osm_line where (highway='tertiary' or highway='secondary' or  highway = 'primary' or highway = 'motorway') and ref is NULL and hstore(tags)-gt;"validate:no_ref" is NULL and junction is NULL) as roads
       </Parameter>
       <Parameter name="estimate_extent">false</Parameter>
       <Parameter name="extent">-20037508,-19929239,20037508,19929239</Parameter>
