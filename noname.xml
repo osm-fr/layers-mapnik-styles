@@ -17,7 +17,7 @@
       <Parameter name="password">ootaephi</Parameter>
       <Parameter name="dbname">osm</Parameter>
       <Parameter name="table">
-      (select way from planet_osm_line where (highway='residential' or  highway = 'minor' or highway = 'unclassified') and (name is NULL or name='FIXME') and "validate:no_name" is NULL) as roads
+      (select way from planet_osm_line where (highway='residential' or  highway = 'minor' or highway = 'unclassified') and name is NULL and hstore(tags)-&gt;"validate:no_name" is NULL) as roads
       </Parameter>
       <Parameter name="estimate_extent">false</Parameter>
       <Parameter name="extent">-20037508,-19929239,20037508,19929239</Parameter>
