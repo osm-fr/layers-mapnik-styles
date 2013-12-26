@@ -1,52 +1,51 @@
-<!DOCTYPE Map>
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE Map[
+  <!ENTITY maxscale "500000">
+  <!ENTITY db_settings SYSTEM "config/db_settings.inc.xml">
+]>
 <Map srs="+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs +over" background-color="transparent" minimum-version="0.7.2">
 <Style name="boundary_ways">
 	<Rule>
 	<Filter>[admin_level]='2'</Filter>
-	<MaxScaleDenominator>50000</MaxScaleDenominator>
+	<MaxScaleDenominator>&maxscale;</MaxScaleDenominator>
 	<LineSymbolizer stroke="#0000FF" stroke-width="2" stroke-opacity="1"/></Rule>
 	<Rule>
 	<Filter>[admin_level]='4'</Filter>
-	<MaxScaleDenominator>50000</MaxScaleDenominator>
+	<MaxScaleDenominator>&maxscale;</MaxScaleDenominator>
 	<LineSymbolizer stroke="#00FF00" stroke-width="2" stroke-opacity="1"/></Rule>
 	<Rule>
 	<Filter>[admin_level]='5'</Filter>
-	<MaxScaleDenominator>50000</MaxScaleDenominator>
+	<MaxScaleDenominator>&maxscale;</MaxScaleDenominator>
 	<LineSymbolizer stroke="#dec703" stroke-width="2" stroke-opacity="1"/></Rule>
 	<Rule>
 	<Filter>[admin_level]='6'</Filter>
-	<MaxScaleDenominator>50000</MaxScaleDenominator>
+	<MaxScaleDenominator>&maxscale;</MaxScaleDenominator>
 	<LineSymbolizer stroke="#0000ff" stroke-width="2" stroke-opacity="1"/></Rule>
 	<Rule>
 	<Filter>[admin_level]='7'</Filter>
-	<MaxScaleDenominator>50000</MaxScaleDenominator>
+	<MaxScaleDenominator>&maxscale;</MaxScaleDenominator>
 	<LineSymbolizer stroke="#FF1b13" stroke-width="2" stroke-opacity="1"/></Rule>
 	<Rule>
 	<Filter>[admin_level]='8'</Filter>
-	<MaxScaleDenominator>50000</MaxScaleDenominator>
+	<MaxScaleDenominator>&maxscale;</MaxScaleDenominator>
 	<LineSymbolizer stroke="#FF0000" stroke-width="2" stroke-opacity="1"/></Rule>
 	<Rule>
 	<Filter>[admin_level]='10'</Filter>
-	<MaxScaleDenominator>50000</MaxScaleDenominator>
+	<MaxScaleDenominator>&maxscale;</MaxScaleDenominator>
 	<LineSymbolizer stroke="#03b0de" stroke-width="2" stroke-opacity="1"/></Rule>
 	<Rule>
 	<ElseFilter/>
-	<MaxScaleDenominator>50000</MaxScaleDenominator>
+	<MaxScaleDenominator>&maxscale;</MaxScaleDenominator>
 	<LineSymbolizer stroke="#000000" stroke-width="2" stroke-opacity="1"/></Rule>
 </Style>
 
   <Layer name="boundary_ways" status="on" srs="+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs +over">
 	  <StyleName>boundary_ways</StyleName>
 	  <Datasource>
-		  <Parameter name="type">postgis</Parameter>
-	<Parameter name="host">osm2pgsql-monde.openstreetmap.fr</Parameter>
-		  <Parameter name="user">layers</Parameter>
-		  <Parameter name="password">ootaephi</Parameter>
-		  <Parameter name="dbname">osm</Parameter>
+	  	  &db_settings;
 		  <Parameter name="table">
-			  (select way,admin_level from planet_osm_line where boundary='administrative') as admin</Parameter>
-		  <Parameter name="estimate_extent">false</Parameter>
-		  <Parameter name="extent">-20037508,-19929239,20037508,19929239</Parameter>
+			  (select way,admin_level from planet_osm_line where boundary='administrative') as admin
+		  </Parameter>
 	  </Datasource>
   </Layer>
 </Map>
