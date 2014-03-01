@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE Map[
   <!ENTITY db_settings SYSTEM "config/db_settings.inc.xml">
+  <!ENTITY font_settings SYSTEM "config/font_settings.inc.xml">
 ]>
 <Map srs="+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs +over" background-color="transparent" minimum-version="0.7.2">
+&font_settings;
 
 
 
@@ -35,8 +37,8 @@
 		<PolygonSymbolizer fill-opacity="0.9" fill="#0f0f0f"/></Rule>
 	<Rule>
 	        <MaxScaleDenominator>300000</MaxScaleDenominator>
-	        <TextSymbolizer size="9" fill="black" dy="0" face-name="DejaVu Sans Bold" halo-radius="1" wrap-width="50">[nom]</TextSymbolizer>
-	        <TextSymbolizer size="9" fill="black" dy="10" face-name="DejaVu Sans Bold" halo-radius="1" wrap-width="50">[avancee_texte]</TextSymbolizer>
+	        <TextSymbolizer size="9" fill="black" dy="0" fontset-name="fontset-bold" halo-radius="1" wrap-width="50">[nom]</TextSymbolizer>
+	        <TextSymbolizer size="9" fill="black" dy="10" fontset-name="fontset-bold" halo-radius="1" wrap-width="50">[avancee_texte]</TextSymbolizer>
         </Rule>
         
 </Style>
