@@ -3,20 +3,25 @@
   <!ENTITY db_settings SYSTEM "config/db_settings.inc.xml">
 ]>
 <Map srs="+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs +over" background-color="transparent" minimum-version="0.7.2">
-<Style name="minor-roads-casing">
+<Style name="without-name">
     <Rule>
-      <MaxScaleDenominator>200000</MaxScaleDenominator>
-      <LineSymbolizer stroke-linejoin="round" stroke="#f00" stroke-width="2" stroke-linecap="round"/></Rule>
+        <MaxScaleDenominator>200000</MaxScaleDenominator>
+        <Filter>[junction]='roundabout'</Filter>
+        <LineSymbolizer stroke-linejoin="round" stroke="#e86b16" stroke-width="2" stroke-linecap="round"/>
+      </Rule>
+      <Rule>
+        <MaxScaleDenominator>200000</MaxScaleDenominator>
+        <ElseFilter/>
+        <LineSymbolizer stroke-linejoin="round" stroke="#e00" stroke-width="2" stroke-linecap="round"/>
+      </Rule>
 </Style>
 
-  <Layer name="minor-roads" status="on" srs="+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs +over">
-    <StyleName>minor-roads-casing</StyleName>
-    <StyleName>minor-roads-fill</StyleName>
-    <StyleName>aerialways</StyleName>
+  <Layer name="without-name" status="on" srs="+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs +over">
+    <StyleName>without-name</StyleName>
     <Datasource>
 	&db_settings;
       <Parameter name="table">
-      (select way from planet_osm_line where highway in ('residential','living_street','unclassified','pedestrian','cycleway') and name is NULL and not (tags ? 'validate:no_name') ) as roads
+      (select * from planet_osm_line where highway in ('residential','living_street','unclassified','pedestrian','cycleway') and name is NULL and not (tags ? 'validate:no_name') ) as roads
       </Parameter>
     </Datasource>
   </Layer>
