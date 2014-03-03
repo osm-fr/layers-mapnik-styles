@@ -16,7 +16,7 @@
     <Datasource>
 	&db_settings;
       <Parameter name="table">
-      (select way from planet_osm_line where highway in ('service','residential','living_street','unclassified','pedestrian','cycleway') and name is NULL and not (tags ? 'validate:no_name') ) as roads
+      (select way from planet_osm_line where highway in ('residential','living_street','unclassified','pedestrian','cycleway') and name is NULL and not (tags ? 'validate:no_name') ) as roads
       </Parameter>
     </Datasource>
   </Layer>
