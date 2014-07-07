@@ -14,19 +14,18 @@ config/db_settings.inc.xml
 voir le wiki d'osm pour installer cette chaine pour un rendu carto avec mapnik
 (dans /config vous trouverez des modèles de configuration pour renderd)
 
-spécificité voirie-cadastre.xml
--------------------------------
-Pour marcher, ce style utilise des données calculées en provenance du cadastre, et seul :
-http://wiki.openstreetmap.org/wiki/User:Frodrigo sait comment les ré-générer 
-un dump de cette table est dispo dans ce dépot ici : données-externes/cadastre.sql.gz
 
 
+Vieux (mais peut revenir au gout du jour si bécanne peu puissante)
+------------------------------------------------------------------
 
 Etait (mais grace à la vitesse du SSD il semblerait jouable de se passer de cette obligation, si cela devait changer, voir l'historique
 sur github https://github.com/osm-fr/layers-mapnik-styles) :
 
 * Il faut à la table planet_osm_polygones un champs géométrique supplément nommé "simplified_way" qui contient une version
 simpifiée de la géométrie contenue dans way (c'est pour accélérer)
-TODO : voir s'il est possible de s'affranchir sans trop impacté les perfs de cette contrainte
+
 Voici les commandes SQL a ajouter post import :
 https://github.com/osm-fr/osm2pgsql-import-tools/blob/master/pre-post-import/after_create.sql
+
+et voir les styles dans l'historique pour retrouver ceux faisant usage de cette colonne simplifiée
